@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local database
+db.sqlite3
+
+# Media files
+Media/
+Static/
+
+# Virtual environment files
+myenv/
+venv/
+ENV/
