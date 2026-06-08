@@ -19,7 +19,8 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv(BASE_DIR / '.env', override=True)
+# Local .env must not override Render dashboard variables (override=False).
+load_dotenv(BASE_DIR / '.env', override=False)
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,9 +28,14 @@ load_dotenv(BASE_DIR / '.env', override=True)
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-dev-only-change-me')
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 'yes')
+
+_default_hosts = 'localhost,127.0.0.1'
+if os.getenv('RENDER'):
+    _default_hosts = 'dearnekitchen.onrender.com,.onrender.com'
+
 ALLOWED_HOSTS = [
     host.strip()
-    for host in os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+    for host in os.getenv('ALLOWED_HOSTS', _default_hosts).split(',')
     if host.strip()
 ]
 
@@ -38,6 +44,9 @@ CSRF_TRUSTED_ORIGINS = [
     for origin in os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
     if origin.strip()
 ]
+
+if os.getenv('RENDER') and not CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS = ['https://dearnekitchen.onrender.com']
 
 
 # Application definition
