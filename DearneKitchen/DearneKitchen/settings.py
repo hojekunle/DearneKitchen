@@ -154,8 +154,9 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 _static_dir = BASE_DIR / 'Static'
 STATICFILES_DIRS = [_static_dir] if _static_dir.exists() else []
 
-MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'Media'
+# On Render, serve committed media via WhiteNoise (same path that already works for CSS/JS).
+MEDIA_URL = '/static/media/' if os.getenv('RENDER') else '/media/'
 
 STORAGES = {
     'default': {

@@ -262,7 +262,7 @@
             <div class="box">
               <div>
                 <div class="img-box">
-                  <img src="/media/{{j.Image}}" alt="{{j.Image}}">
+                  <img src="{{ j.Image.url }}" alt="{{ j.Item_name }}">
                 </div>
                 <div class="detail-box">
                   <h5>
@@ -1082,7 +1082,7 @@
                 </p>
               </div>
               <div class="img-box">
-                <img src="/media/{{k.Image}}" alt="{{k.Image}}" class="box-img">
+                <img src="{{ k.Image.url }}" alt="{{ k.User_name }}" class="box-img">
               </div>
             </div>
           </div>
