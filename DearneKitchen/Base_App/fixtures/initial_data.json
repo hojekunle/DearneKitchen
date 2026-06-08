@@ -1,0 +1,375 @@
+[
+{
+  "model": "Base_App.itemlist",
+  "pk": 1,
+  "fields": {
+    "Category_name": "Pizza"
+  }
+},
+{
+  "model": "Base_App.itemlist",
+  "pk": 2,
+  "fields": {
+    "Category_name": "Fries"
+  }
+},
+{
+  "model": "Base_App.itemlist",
+  "pk": 3,
+  "fields": {
+    "Category_name": "Burger"
+  }
+},
+{
+  "model": "Base_App.itemlist",
+  "pk": 4,
+  "fields": {
+    "Category_name": "Pasta"
+  }
+},
+{
+  "model": "Base_App.itemlist",
+  "pk": 5,
+  "fields": {
+    "Category_name": "Sandwich"
+  }
+},
+{
+  "model": "Base_App.items",
+  "pk": 1,
+  "fields": {
+    "Item_name": "Mozarella Pizza",
+    "description": "Medium Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque",
+    "Price": 10,
+    "Category": 1,
+    "Image": "items/pizza-one.png"
+  }
+},
+{
+  "model": "Base_App.items",
+  "pk": 2,
+  "fields": {
+    "Item_name": "Delicious Burger",
+    "description": "Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque",
+    "Price": 12,
+    "Category": 3,
+    "Image": "items/burger-two.png"
+  }
+},
+{
+  "model": "Base_App.items",
+  "pk": 3,
+  "fields": {
+    "Item_name": "Delicious Pizza",
+    "description": "Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque",
+    "Price": 15,
+    "Category": 1,
+    "Image": "items/pizza-one.png"
+  }
+},
+{
+  "model": "Base_App.items",
+  "pk": 4,
+  "fields": {
+    "Item_name": "Tasty Burger",
+    "description": "Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque",
+    "Price": 12,
+    "Category": 3,
+    "Image": "items/f2.png"
+  }
+},
+{
+  "model": "Base_App.items",
+  "pk": 5,
+  "fields": {
+    "Item_name": "Tasty Turkish Burger",
+    "description": "Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque",
+    "Price": 14,
+    "Category": 3,
+    "Image": "items/f8.png"
+  }
+},
+{
+  "model": "Base_App.items",
+  "pk": 6,
+  "fields": {
+    "Item_name": "Cheese Pizza",
+    "description": "Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque",
+    "Price": 15,
+    "Category": 1,
+    "Image": "items/f3.png"
+  }
+},
+{
+  "model": "Base_App.items",
+  "pk": 7,
+  "fields": {
+    "Item_name": "Veggie Pizza",
+    "description": "Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque",
+    "Price": 20,
+    "Category": 1,
+    "Image": "items/f6.png"
+  }
+},
+{
+  "model": "Base_App.items",
+  "pk": 8,
+  "fields": {
+    "Item_name": "Veggie Cheese Pizza",
+    "description": "Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque",
+    "Price": 25,
+    "Category": 1,
+    "Image": "items/o2.jpg"
+  }
+},
+{
+  "model": "Base_App.items",
+  "pk": 9,
+  "fields": {
+    "Item_name": "Delicious Pasta",
+    "description": "Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque",
+    "Price": 18,
+    "Category": 4,
+    "Image": "items/f4.png"
+  }
+},
+{
+  "model": "Base_App.items",
+  "pk": 10,
+  "fields": {
+    "Item_name": "Delicious Spicy Pasta",
+    "description": "Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque",
+    "Price": 20,
+    "Category": 4,
+    "Image": "items/f9.png"
+  }
+},
+{
+  "model": "Base_App.items",
+  "pk": 11,
+  "fields": {
+    "Item_name": "French Fries",
+    "description": "Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque",
+    "Price": 5,
+    "Category": 2,
+    "Image": "items/f5.png"
+  }
+},
+{
+  "model": "Base_App.items",
+  "pk": 12,
+  "fields": {
+    "Item_name": "Chicken Sandwich",
+    "description": "Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque",
+    "Price": 10,
+    "Category": 5,
+    "Image": "items/sandwich_1339-1108.avif"
+  }
+},
+{
+  "model": "Base_App.aboutus",
+  "pk": 1,
+  "fields": {
+    "Description": "Welcome to Dearne’s Kitchen, your ultimate neighborhood destination for comforting, flavor-packed meals. We specialize in serving up a mouthwatering variety of classic favorites made fresh to order. Whether you are craving a thick, juicy burger stacked with premium toppings or a hot, cheesy pizza baked to golden perfection, our menu is designed to satisfy every craving."
+  }
+},
+{
+  "model": "Base_App.aboutus",
+  "pk": 2,
+  "fields": {
+    "Description": "Looking for something quick and satisfying? Try our crispy, seasoned fries, or dive into one of our signature handcrafted sandwiches, loaded with fresh ingredients. Pair any of our delicious dishes with our wide selection of ice-cold, refreshing drinks for the perfect combination."
+  }
+},
+{
+  "model": "Base_App.aboutus",
+  "pk": 3,
+  "fields": {
+    "Description": "At Dearne’s Kitchen, we pride ourselves on exceptional taste, high-quality ingredients, and fast, friendly service. Drop by today to experience great food made with passion, or order online to bring the comfort of Dearne's Kitchen straight to your table!"
+  }
+},
+{
+  "model": "Base_App.feedback",
+  "pk": 1,
+  "fields": {
+    "User_name": "Thinasha Mendis",
+    "Description": "Visited the restaurant for a mid week dinner and it was an enjoyable one. Was not very crowded, so the meals arrived pretty soon at the table. Ordered a few koftes, kebabs and calamari which were all delicious. The restaurant was very clean and staff were pleasant. While the food menu had a great selection the drinks menu was somewhat limited. Overall great experience.",
+    "Rating": 5,
+    "Image": "feedback/client1.jpg"
+  }
+},
+{
+  "model": "Base_App.feedback",
+  "pk": 2,
+  "fields": {
+    "User_name": "Murad Akram",
+    "Description": "We went today for iftar with the team at work, our server was an Egyptian gentleman, kind, funny, polite and very helpful, he was always to check if we needed anything, we left with a smile on our face, I have been a regular customer for years but today felt special, shoutout to the greag server who I unfortunately forgot his name.",
+    "Rating": 5,
+    "Image": "feedback/client2.jpg"
+  }
+},
+{
+  "model": "Base_App.booktable",
+  "pk": 1,
+  "fields": {
+    "Name": "Habeeb",
+    "Phone_number": "+44 7933 866533",
+    "Email": "hojekunle@gmail.com",
+    "Total_person": 2,
+    "Booking_date": "2026-06-12"
+  }
+},
+{
+  "model": "Base_App.booktable",
+  "pk": 2,
+  "fields": {
+    "Name": "Robert",
+    "Phone_number": "07933 866533",
+    "Email": "robert@dysonit.com",
+    "Total_person": 5,
+    "Booking_date": "2026-06-27"
+  }
+},
+{
+  "model": "Base_App.booktable",
+  "pk": 3,
+  "fields": {
+    "Name": "Robert",
+    "Phone_number": "07933 866533",
+    "Email": "robert@dysonit.com",
+    "Total_person": 5,
+    "Booking_date": "2026-06-27"
+  }
+},
+{
+  "model": "Base_App.booktable",
+  "pk": 4,
+  "fields": {
+    "Name": "Robert",
+    "Phone_number": "07933 866533",
+    "Email": "robert@dysonit.com",
+    "Total_person": 5,
+    "Booking_date": "2026-06-27"
+  }
+},
+{
+  "model": "Base_App.booktable",
+  "pk": 5,
+  "fields": {
+    "Name": "Robert",
+    "Phone_number": "07933 866533",
+    "Email": "robert@dysonit.com",
+    "Total_person": 5,
+    "Booking_date": "2026-06-27"
+  }
+},
+{
+  "model": "Base_App.booktable",
+  "pk": 6,
+  "fields": {
+    "Name": "Robert",
+    "Phone_number": "07933 866533",
+    "Email": "robert@dysonit.com",
+    "Total_person": 4,
+    "Booking_date": "2026-07-10"
+  }
+},
+{
+  "model": "Base_App.booktable",
+  "pk": 7,
+  "fields": {
+    "Name": "Habeeb",
+    "Phone_number": "07933866533",
+    "Email": "hojekunle@gmail.com",
+    "Total_person": 5,
+    "Booking_date": "2026-06-25"
+  }
+},
+{
+  "model": "Base_App.booktable",
+  "pk": 8,
+  "fields": {
+    "Name": "Habeeb",
+    "Phone_number": "07933866533",
+    "Email": "hojekunle@gmail.com",
+    "Total_person": 5,
+    "Booking_date": "2026-06-25"
+  }
+},
+{
+  "model": "Base_App.booktable",
+  "pk": 9,
+  "fields": {
+    "Name": "Habeeb",
+    "Phone_number": "07933866533",
+    "Email": "hojekunle@gmail.com",
+    "Total_person": 2,
+    "Booking_date": "2026-06-12"
+  }
+},
+{
+  "model": "Base_App.booktable",
+  "pk": 10,
+  "fields": {
+    "Name": "Habeeb",
+    "Phone_number": "07933866533",
+    "Email": "hojekunle@gmail.com",
+    "Total_person": 1,
+    "Booking_date": "2026-07-02"
+  }
+},
+{
+  "model": "Base_App.booktable",
+  "pk": 11,
+  "fields": {
+    "Name": "Habeeb",
+    "Phone_number": "07933866533",
+    "Email": "hojekunle@gmail.com",
+    "Total_person": 2,
+    "Booking_date": "2026-07-10"
+  }
+},
+{
+  "model": "Base_App.booktable",
+  "pk": 12,
+  "fields": {
+    "Name": "Habeeb",
+    "Phone_number": "07933866533",
+    "Email": "hojekunle@gmail.com",
+    "Total_person": 2,
+    "Booking_date": "2026-07-12"
+  }
+},
+{
+  "model": "Base_App.booktable",
+  "pk": 13,
+  "fields": {
+    "Name": "Habeeb",
+    "Phone_number": "07933866533",
+    "Email": "hojekunle@gmail.com",
+    "Total_person": 2,
+    "Booking_date": "2026-07-11"
+  }
+},
+{
+  "model": "Base_App.booktable",
+  "pk": 14,
+  "fields": {
+    "Name": "Habeeb",
+    "Phone_number": "07933866533",
+    "Email": "hojekunle@gmail.com",
+    "Total_person": 1,
+    "Booking_date": "2026-07-10"
+  }
+},
+{
+  "model": "Base_App.booktable",
+  "pk": 15,
+  "fields": {
+    "Name": "Habeeb",
+    "Phone_number": "07933866533",
+    "Email": "hojekunle@gmail.com",
+    "Total_person": 1,
+    "Booking_date": "2026-07-01"
+  }
+}
+]

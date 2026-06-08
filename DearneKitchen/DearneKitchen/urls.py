@@ -29,6 +29,5 @@ urlpatterns = [
     path('feedback/', FeedbackView, name='Feedback'),
 ] 
 
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# User-uploaded images (menu items, feedback photos) are stored under Media/.
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
