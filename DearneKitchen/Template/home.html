@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-
+{% load static %}
+{% block home_status %}active{% endblock home_status %}
 {% block slider %}
   <!-- slider section -->
   <section class="slider_section ">
@@ -14,7 +15,7 @@
                         Fast Food Restaurant
                       </h1>
                       <p>
-                        Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                        Craving delicious, hot meals served fast? Dearne's Kitchen is your go-to restaurant, packing bold flavors into every bite. Our dedicated kitchen staff works tirelessly around the clock, choosing only top-tier ingredients to craft burgers, pizzas, and crispy golden fries perfectly tailored for you
                       </p>
                       <div class="btn-box">
                         <a href="" class="btn1">
@@ -26,6 +27,7 @@
                 </div>
               </div>
             </div>
+            {% comment "" %}
             <div class="carousel-item ">
               <div class="container ">
                 <div class="row">
@@ -68,12 +70,15 @@
                 </div>
               </div>
             </div>
+            {% endcomment %}
           </div>
           <div class="container">
             <ol class="carousel-indicators">
               <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+              {% comment "" %}
               <li data-target="#customCarousel1" data-slide-to="1"></li>
               <li data-target="#customCarousel1" data-slide-to="2"></li>
+              {% endcomment %}
             </ol>
           </div>
         </div>
@@ -92,7 +97,7 @@
           <div class="col-md-6  ">
             <div class="box ">
               <div class="img-box">
-                <img src="images/o1.jpg" alt="">
+                <img src="{% static 'images/o1.jpg' %}" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -161,7 +166,7 @@
           <div class="col-md-6  ">
             <div class="box ">
               <div class="img-box">
-                <img src="images/o2.jpg" alt="">
+                <img src="{% static 'images/o2.jpg' %}" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -235,8 +240,7 @@
   <!-- end offer section -->
 
   <!-- food section -->
-
-  <section class="food_section layout_padding-bottom">
+  <section class="food_section layout_padding">
     <div class="container">
       <div class="heading_container heading_center">
         <h2>
@@ -246,30 +250,30 @@
 
       <ul class="filters_menu">
         <li class="active" data-filter="*">All</li>
-        <li data-filter=".burger">Burger</li>
-        <li data-filter=".pizza">Pizza</li>
-        <li data-filter=".pasta">Pasta</li>
-        <li data-filter=".fries">Fries</li>
+        {% for i in item_categories %}
+        <li data-filter=".{{i.Category_name}}">{{i.Category_name}}</li>
+        {% endfor %}
       </ul>
 
       <div class="filters-content">
         <div class="row grid">
-          <div class="col-sm-6 col-lg-4 all pizza">
+            {% for j in items %}
+          <div class="col-sm-6 col-lg-4 all {{j.Category}}">
             <div class="box">
               <div>
                 <div class="img-box">
-                  <img src="images/f1.png" alt="">
+                  <img src="/media/{{j.Image}}" alt="{{j.Image}}">
                 </div>
                 <div class="detail-box">
                   <h5>
-                    Delicious Pizza
+                    {{j.Item_name}}
                   </h5>
                   <p>
-                    Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                    {{j.description}}
                   </p>
                   <div class="options">
                     <h6>
-                      $20
+                      ${{j.Price}}
                     </h6>
                     <a href="">
                       <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
@@ -330,6 +334,7 @@
               </div>
             </div>
           </div>
+          {% comment "" %}
           <div class="col-sm-6 col-lg-4 all burger">
             <div class="box">
               <div>
@@ -938,6 +943,8 @@
               </div>
             </div>
           </div>
+          {% endcomment %}
+          {% endfor %}
         </div>
       </div>
       <div class="btn-box">
@@ -965,7 +972,7 @@
           <div class="detail-box">
             <div class="heading_container">
               <h2>
-                We Are Feane
+                We Are Dearne's Kitchen
               </h2>
             </div>
             <p>
@@ -996,37 +1003,40 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
-            <form action="">
+            <form action="{% url "Book_Table" %}" method="POST">{% csrf_token %}
               <div>
-                <input type="text" class="form-control" placeholder="Your Name" />
+                <input type="text" class="form-control" name="user_name" required placeholder="Your Name" />
               </div>
               <div>
-                <input type="text" class="form-control" placeholder="Phone Number" />
+                <input type="text" class="form-control" name="phone_number" required placeholder="Phone Number" />
               </div>
               <div>
-                <input type="email" class="form-control" placeholder="Your Email" />
+                <input type="email" class="form-control" name="user_email" required placeholder="Your Email" />
               </div>
               <div>
-                <select class="form-control nice-select wide">
+                <select class="form-control nice-select wide" required name=total_persons>
                   <option value="" disabled selected>
                     How many persons?
                   </option>
-                  <option value="">
+                  <option value="1">
+                    1
+                  </option>
+                  <option value="2">
                     2
                   </option>
-                  <option value="">
+                  <option value="3">
                     3
                   </option>
-                  <option value="">
+                  <option value="4">
                     4
                   </option>
-                  <option value="">
+                  <option value="5">
                     5
                   </option>
                 </select>
               </div>
               <div>
-                <input type="date" class="form-control">
+                <input type="date" name="booking_date" required class="form-control">
               </div>
               <div class="btn_box">
                 <button>
@@ -1038,7 +1048,7 @@
         </div>
         <div class="col-md-6">
           <div class="map_container ">
-            <div id="googleMap"></div>
+            <div id="googleMap" style="height: 400px; width: 100%;"></div> 
           </div>
         </div>
       </div>
@@ -1057,42 +1067,26 @@
       </div>
       <div class="carousel-wrap row ">
         <div class="owl-carousel client_owl-carousel">
+          {% for k in reviews %}
           <div class="item">
             <div class="box">
               <div class="detail-box">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                  {{k.Description}}
                 </p>
                 <h6>
-                  Moana Michell
+                  {{k.User_name}}
                 </h6>
                 <p>
-                  magna aliqua
+                  Rating: {{k.Rating}}/5
                 </p>
               </div>
               <div class="img-box">
-                <img src="images/client1.jpg" alt="" class="box-img">
+                <img src="/media/{{k.Image}}" alt="{{k.Image}}" class="box-img">
               </div>
             </div>
           </div>
-          <div class="item">
-            <div class="box">
-              <div class="detail-box">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
-                </p>
-                <h6>
-                  Mike Hamell
-                </h6>
-                <p>
-                  magna aliqua
-                </p>
-              </div>
-              <div class="img-box">
-                <img src="images/client2.jpg" alt="" class="box-img">
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
       </div>
     </div>

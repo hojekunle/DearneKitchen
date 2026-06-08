@@ -2,6 +2,8 @@
 
 {% block class %}class="sub_page"{% endblock class %} <!--add class sub_page to this region in base.html file-->
 
+{% block table_status %}active{% endblock table_status %}
+
 {% block main %}
 <!-- book section -->
   <section class="book_section layout_padding">
@@ -14,37 +16,40 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
-            <form action="">
+            <form action="{% url "Book_Table" %}" method="POST">{% csrf_token %}
               <div>
-                <input type="text" class="form-control" placeholder="Your Name" />
+                <input type="text" class="form-control" name="user_name" required placeholder="Your Name" />
               </div>
               <div>
-                <input type="text" class="form-control" placeholder="Phone Number" />
+                <input type="text" class="form-control" name="phone_number" required placeholder="Phone Number" />
               </div>
               <div>
-                <input type="email" class="form-control" placeholder="Your Email" />
+                <input type="email" class="form-control" name="user_email" required placeholder="Your Email" />
               </div>
               <div>
-                <select class="form-control nice-select wide">
+                <select class="form-control nice-select wide" required name=total_persons>
                   <option value="" disabled selected>
                     How many persons?
                   </option>
-                  <option value="">
+                  <option value="1">
+                    1
+                  </option>
+                  <option value="2">
                     2
                   </option>
-                  <option value="">
+                  <option value="3">
                     3
                   </option>
-                  <option value="">
+                  <option value="4">
                     4
                   </option>
-                  <option value="">
+                  <option value="5">
                     5
                   </option>
                 </select>
               </div>
               <div>
-                <input type="date" class="form-control">
+                <input type="date" name="booking_date" required class="form-control">
               </div>
               <div class="btn_box">
                 <button>
@@ -56,12 +61,36 @@
         </div>
         <div class="col-md-6">
           <div class="map_container ">
-            <div id="googleMap"></div>
+            <div id="googleMap" style="height: 400px; width: 100%;"></div> 
           </div>
         </div>
       </div>
     </div>
   </section>
   <!-- end book section -->
+
+<!-- Add the Google Maps API -->
+<script src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&callback=initMap" async defer></script>
+
+<!-- Initialize Google Map -->
+<script>
+function initMap() {
+  // Set the location of your restaurant (replace with your actual coordinates)
+  var restaurantLocation = { lat: 53.5521, lng: -1.4958 }; // Example coordinates (change these)
+
+  // Create the map centered on the restaurant
+  var map = new google.maps.Map(document.getElementById('googleMap'), {
+    zoom: 14,  // Set zoom level
+    center: restaurantLocation  // Set map's center
+  });
+
+  // Add a marker at the restaurant's location
+  var marker = new google.maps.Marker({
+    position: restaurantLocation,
+    map: map,
+    title: 'Your Restaurant Name'  // Change this to your restaurant's name
+  });
+}
+</script>
 
 {% endblock main %}
