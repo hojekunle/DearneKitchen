@@ -29,5 +29,9 @@ urlpatterns = [
     path('feedback/', FeedbackView, name='Feedback'),
 ] 
 
-# User-uploaded images (menu items, feedback photos) are stored under Media/.
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve uploaded images in production (django.conf.urls.static skips this when DEBUG=False).
+urlpatterns += static(
+    settings.MEDIA_URL,
+    document_root=settings.MEDIA_ROOT,
+    insecure=True,
+)
