@@ -3,8 +3,8 @@ set -o errexit
 
 pip install -r requirements.txt
 python manage.py collectstatic --no-input
-mkdir -p staticfiles/media/items staticfiles/media/feedback
-cp -r Media/items/. staticfiles/media/items/
-cp -r Media/feedback/. staticfiles/media/feedback/
+echo "=== Media files collected to staticfiles ==="
+ls -la Media/items/ | head -5
+ls -la staticfiles/media/items/ | head -5
 python manage.py migrate --no-input
 python manage.py seed_initial_data

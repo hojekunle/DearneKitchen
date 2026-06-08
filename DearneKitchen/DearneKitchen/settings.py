@@ -151,12 +151,18 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+STATICFILES_DIRS = []
 _static_dir = BASE_DIR / 'Static'
-STATICFILES_DIRS = [_static_dir] if _static_dir.exists() else []
+_media_dir = BASE_DIR / 'Media'
+if _static_dir.exists():
+    STATICFILES_DIRS.append(_static_dir)
+# Collect menu/review images into staticfiles/media/ during collectstatic.
+if _media_dir.exists():
+    STATICFILES_DIRS.append(('media', _media_dir))
 
-MEDIA_ROOT = BASE_DIR / 'Media'
-# On Render, serve committed media via WhiteNoise (same path that already works for CSS/JS).
-MEDIA_URL = '/static/media/' if os.getenv('RENDER') else '/media/'
+MEDIA_ROOT = _media_dir
+# Production (Render): serve via WhiteNoise at /static/media/...
+MEDIA_URL = '/static/media/' if os.getenv('DATABASE_URL') else '/media/'
 
 STORAGES = {
     'default': {
