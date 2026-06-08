@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: dearnekitchen
+    runtime: python
+    rootDir: DearneKitchen
+    buildCommand: bash build.sh
+    startCommand: gunicorn DearneKitchen.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.11
+      - key: DEBUG
+        value: "False"
