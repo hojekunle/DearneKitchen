@@ -97,8 +97,8 @@ class BookTableForm(forms.ModelForm):
 
     def clean_phone_number(self):
         phone = self.cleaned_data['phone_number']
-        if not phone.isdigit() or len(phone) != 10:
-            raise ValidationError('Phone number must be exactly 10 digits.')
+        if not phone.isdigit() or not (10 <= len(phone) <= 15):
+            raise ValidationError('Phone number must be 10–15 digits.')
         return phone
 
     def clean_total_person(self):

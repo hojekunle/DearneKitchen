@@ -73,7 +73,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='booktable',
             name='Phone_number',
-            field=models.CharField(max_length=10),
+            field=models.CharField(max_length=20),
         ),
         migrations.AlterField(
             model_name='booktable',
