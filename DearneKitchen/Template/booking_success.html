@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block table_status %}active{% endblock table_status %}
+{% block main %}
+
+<section class="book_section layout_padding">
+  <div class="container">
+    <div class="heading_container">
+      <h2>Booking Confirmed</h2>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="alert alert-success">
+          <h4>Thank you, {{ booking.Name }}!</h4>
+          <p>Your table booking has been submitted successfully.</p>
+          <ul class="list-unstyled mt-3">
+            <li><strong>Date:</strong> {{ booking.Booking_date }}</li>
+            <li><strong>Party size:</strong> {{ booking.Total_person }}</li>
+            <li><strong>Email:</strong> {{ booking.Email }}</li>
+            <li><strong>Status:</strong> {{ booking.get_status_display }}</li>
+          </ul>
+          <p class="mb-0 mt-3">A confirmation email has been sent to {{ booking.Email }}.</p>
+        </div>
+        <div class="text-center">
+          <a href="{% url 'Home' %}" class="btn btn-primary mr-2">Back to Home</a>
+          <a href="{% url 'Menu' %}" class="btn btn-secondary">Browse Menu</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock main %}

@@ -1,0 +1,57 @@
+<script>
+(function() {
+  function getCsrfToken() {
+    const match = document.cookie.match(/csrftoken=([^;]+)/);
+    return match ? match[1] : '';
+  }
+
+  window.showToast = function(message, type) {
+    type = type || 'success';
+    let container = document.getElementById('toast-container');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'toast-container';
+      container.style.cssText = 'position:fixed;top:20px;right:20px;z-index:9999;';
+      document.body.appendChild(container);
+    }
+    const toast = document.createElement('div');
+    toast.className = 'alert alert-' + (type === 'error' ? 'danger' : 'success');
+    toast.style.cssText = 'min-width:250px;margin-bottom:10px;box-shadow:0 4px 12px rgba(0,0,0,0.15);';
+    toast.textContent = message;
+    container.appendChild(toast);
+    setTimeout(function() { toast.remove(); }, 3500);
+  };
+
+  window.updateCartBadge = function(count) {
+    const badge = document.getElementById('cart-badge');
+    if (!badge) return;
+    badge.textContent = count;
+    badge.style.display = count > 0 ? 'inline-block' : 'none';
+  };
+
+  document.querySelectorAll('.add-to-cart').forEach(function(button) {
+    button.addEventListener('click', function() {
+      const itemId = this.getAttribute('data-item-id');
+      const itemName = this.getAttribute('data-item-name');
+      fetch('{% url "add_to_cart" %}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-CSRFToken': getCsrfToken()
+        },
+        body: 'item_id=' + encodeURIComponent(itemId)
+      })
+      .then(function(response) { return response.json(); })
+      .then(function(data) {
+        if (data.message) {
+          showToast(data.message, 'success');
+          updateCartBadge(data.count || 0);
+        } else if (data.error) {
+          showToast(data.error, 'error');
+        }
+      })
+      .catch(function() { showToast('Failed to add item to cart.', 'error'); });
+    });
+  });
+})();
+</script>

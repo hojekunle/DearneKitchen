@@ -1,0 +1,77 @@
+{% load static %}
+<ul class="filters_menu mb-2">
+  <li class="{% if not selected_category %}active{% endif %}" data-filter="*">All</li>
+  {% for i in list %}
+  <li class="{% if selected_category == i.Category_name %}active{% endif %}" data-filter=".{{ i.Category_name }}">
+    {{ i.Category_name }}
+  </li>
+  {% endfor %}
+</ul>
+
+<div class="filters-content">
+  <div class="row grid">
+    {% for j in items %}
+    <div class="col-sm-6 col-lg-4 all {{ j.Category.Category_name }}">
+      <div class="box">
+        <div>
+          <div class="img-box">
+            {% if j.Image %}
+            <img src="{{ j.Image.url }}" alt="{{ j.Item_name }}" loading="lazy">
+            {% else %}
+            <img src="{% static 'images/f1.png' %}" alt="{{ j.Item_name }}" loading="lazy">
+            {% endif %}
+          </div>
+          <div class="detail-box">
+            <h5>{{ j.Item_name }}</h5>
+            <p>{{ j.description }}</p>
+            <div class="options menu-item-actions">
+              <h6>${{ j.Price }}</h6>
+              <button type="button" class="btn btn-success btn-sm btn-add-cart add-to-cart" data-item-id="{{ j.id }}" data-item-name="{{ j.Item_name }}">
+                <i class="fa fa-cart-plus"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col-12 text-center py-4">
+      <p>No menu items found{% if search_query %} for "{{ search_query }}"{% endif %}.</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% if page_obj.paginator.num_pages > 1 %}
+<div class="btn-box mt-4">
+  <nav aria-label="Menu pagination">
+    <ul class="pagination justify-content-center mb-0">
+      {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if search_query %}&amp;q={{ search_query|urlencode }}{% endif %}{% if selected_category %}&amp;category={{ selected_category|urlencode }}{% endif %}">Previous</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled"><span class="page-link">Previous</span></li>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+      <li class="page-item{% if page_obj.number == num %} active{% endif %}">
+        {% if page_obj.number == num %}
+        <span class="page-link">{{ num }}</span>
+        {% else %}
+        <a class="page-link" href="?page={{ num }}{% if search_query %}&amp;q={{ search_query|urlencode }}{% endif %}{% if selected_category %}&amp;category={{ selected_category|urlencode }}{% endif %}">{{ num }}</a>
+        {% endif %}
+      </li>
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if search_query %}&amp;q={{ search_query|urlencode }}{% endif %}{% if selected_category %}&amp;category={{ selected_category|urlencode }}{% endif %}">Next</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled"><span class="page-link">Next</span></li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
+{% endif %}

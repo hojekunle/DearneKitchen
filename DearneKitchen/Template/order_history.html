@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block menu_status %}active{% endblock menu_status %}
+{% block class %}class="sub_page"{% endblock class %}
+{% block main %}
+
+<section class="food_section layout_padding-bottom">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>Order History</h2>
+    </div>
+
+    {% if orders %}
+    {% for order in orders %}
+    <div class="card mb-4">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span><strong>Order #{{ order.id }}</strong> — {{ order.created_at|date:"M d, Y H:i" }}</span>
+        <span class="badge badge-{% if order.payment_status == 'paid' %}success{% elif order.payment_status == 'failed' %}danger{% else %}warning{% endif %} ml-2">
+          {{ order.get_payment_status_display }}
+        </span>
+        <span class="badge badge-{% if order.status == 'completed' %}success{% elif order.status == 'cancelled' %}danger{% else %}secondary{% endif %}">
+          {{ order.get_status_display }}
+        </span>
+      </div>
+      <div class="card-body">
+        {% if order.payment_status == 'unpaid' and order.status == 'pending' %}
+        <a href="{% url 'payment_page' order.id %}" class="btn btn-sm btn-success mb-3">Pay Now</a>
+        {% endif %}
+        <table class="table table-sm mb-0">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in order.items.all %}
+            <tr>
+              <td>{{ item.item_name }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>${{ item.price }}</td>
+              <td>${{ item.line_total }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="3" class="text-right">Grand Total</th>
+              <th>${{ order.total_amount }}</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="text-center py-5">
+      <p>You have not placed any orders yet.</p>
+      <a href="{% url 'Menu' %}" class="btn btn-primary">Browse Menu</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock main %}

@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="">
+  <title>Sign in — Dearne's Kitchen</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
+  <link href="{% static 'css/site-extras.css' %}" rel="stylesheet">
+</head>
+<body class="auth-page">
+  <div class="auth-container">
+    <div class="text-center mb-4">
+      <img src="{% static 'images/favicon.png' %}" alt="Dearne's Kitchen" class="brand-logo">
+      <h4 class="mb-1">Dearne's Kitchen</h4>
+      {% if process == "connect" %}
+      <p class="text-muted mb-0">Connect your {{ provider.name }} account</p>
+      {% else %}
+      <p class="text-muted mb-0">Sign in with {{ provider.name }}</p>
+      {% endif %}
+    </div>
+
+    <p class="text-muted small text-center mb-4">
+      {% if process == "connect" %}
+      You are about to connect a third-party account from {{ provider.name }}.
+      {% else %}
+      You will be redirected to {{ provider.name }} to complete sign in.
+      {% endif %}
+    </p>
+
+    <form method="post" action="">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary">Continue with {{ provider.name }}</button>
+    </form>
+
+    <a href="{% url 'login' %}" class="btn btn-outline-secondary mt-3">Back to login</a>
+  </div>
+</body>
+</html>

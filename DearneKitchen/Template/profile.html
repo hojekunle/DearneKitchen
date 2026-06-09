@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block class %}class="sub_page"{% endblock class %}
+{% block main %}
+<section class="food_section layout_padding">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>My Profile</h2>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
+            <div class="text-center mb-4">
+              {% if user_profile.avatar %}
+              <img src="{{ user_profile.avatar.url }}" alt="Avatar" class="profile-avatar-lg mb-2">
+              {% else %}
+              <img src="{% static 'images/favicon.png' %}" alt="Avatar" class="profile-avatar-lg mb-2">
+              {% endif %}
+              <h4>{{ user.username }}</h4>
+              <p class="text-muted mb-0">Member since {{ user.date_joined|date:"M Y" }}</p>
+            </div>
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>First name</label>
+                  {{ form.first_name }}
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Last name</label>
+                  {{ form.last_name }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                {{ form.email }}
+              </div>
+              <div class="form-group">
+                <label>Phone</label>
+                {{ form.phone }}
+              </div>
+              <div class="form-group">
+                <label>Address</label>
+                {{ form.address }}
+              </div>
+              <div class="form-group">
+                <label>Bio</label>
+                {{ form.bio }}
+              </div>
+              <div class="form-group">
+                <label>Profile photo</label>
+                {{ form.avatar }}
+              </div>
+              <button type="submit" class="btn btn-primary">Save Profile</button>
+              <a href="{% url 'order_history' %}" class="btn btn-outline-secondary ml-2">View Orders</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock main %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block class %}class="sub_page"{% endblock class %}
+{% block main %}
+<section class="food_section layout_padding">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>Complete Payment</h2>
+      <p>Order #{{ order.id }} — ${{ order.total_amount }}</p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card shadow-sm mb-4">
+          <div class="card-header"><strong>Order Summary</strong></div>
+          <ul class="list-group list-group-flush">
+            {% for item in order.items.all %}
+            <li class="list-group-item d-flex justify-content-between">
+              <span>{{ item.item_name }} x{{ item.quantity }}</span>
+              <span>${{ item.line_total }}</span>
+            </li>
+            {% endfor %}
+            <li class="list-group-item d-flex justify-content-between font-weight-bold">
+              <span>Total</span>
+              <span>${{ order.total_amount }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="mb-3">Choose payment method</h5>
+            {% if stripe_enabled %}
+            <a href="{% url 'stripe_checkout' order.id %}" class="btn btn-dark btn-block mb-2">
+              <i class="fa fa-credit-card"></i> Pay with Stripe
+            </a>
+            {% endif %}
+            {% if paypal_enabled %}
+            <a href="{% url 'paypal_checkout' order.id %}" class="btn btn-primary btn-block mb-2" style="background:#0070ba;border-color:#0070ba;">
+              <i class="fa fa-paypal"></i> Pay with PayPal
+            </a>
+            {% endif %}
+            {% if not stripe_enabled and not paypal_enabled %}
+            <div class="alert alert-warning">
+              Payment is not configured yet. Add <code>STRIPE_SECRET_KEY</code> and/or
+              <code>PAYPAL_CLIENT_ID</code> / <code>PAYPAL_CLIENT_SECRET</code> to your environment.
+            </div>
+            {% endif %}
+            <a href="{% url 'order_history' %}" class="btn btn-outline-secondary btn-block mt-2">Back to Orders</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock main %}

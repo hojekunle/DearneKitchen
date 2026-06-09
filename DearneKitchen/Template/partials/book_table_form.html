@@ -1,0 +1,29 @@
+<form action="{% url 'Book_Table' %}" method="post">
+  {% csrf_token %}
+  {% if form.non_field_errors %}
+  <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+  {% endif %}
+  <div>
+    {{ form.user_name }}
+    {% if form.user_name.errors %}<small class="text-danger">{{ form.user_name.errors.0 }}</small>{% endif %}
+  </div>
+  <div>
+    {{ form.phone_number }}
+    {% if form.phone_number.errors %}<small class="text-danger">{{ form.phone_number.errors.0 }}</small>{% endif %}
+  </div>
+  <div>
+    {{ form.user_email }}
+    {% if form.user_email.errors %}<small class="text-danger">{{ form.user_email.errors.0 }}</small>{% endif %}
+  </div>
+  <div>
+    {{ form.total_person }}
+    {% if form.total_person.errors %}<small class="text-danger">{{ form.total_person.errors.0 }}</small>{% endif %}
+  </div>
+  <div>
+    {{ form.booking_data }}
+    {% if form.booking_data.errors %}<small class="text-danger">{{ form.booking_data.errors.0 }}</small>{% endif %}
+  </div>
+  <div class="btn_box">
+    <button type="submit">Book Now</button>
+  </div>
+</form>

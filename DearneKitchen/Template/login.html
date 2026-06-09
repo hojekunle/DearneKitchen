@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load socialaccount %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="">
+    <title>Login — Dearne's Kitchen</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
+    <link href="{% static 'css/site-extras.css' %}" rel="stylesheet">
+    <style>
+        .field-error { color: #dc3545; font-size: 0.875rem; }
+    </style>
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="text-center mb-3">
+            <img src="{% static 'images/favicon.png' %}" alt="Dearne's Kitchen" class="brand-logo">
+            <h4 class="mb-0">Dearne's Kitchen</h4>
+            <small class="text-muted">Welcome back</small>
+        </div>
+
+        <div class="auth-tabs">
+            <button id="login-tab" class="active" type="button" onclick="switchTab('login')">Login</button>
+            <button id="signup-tab" type="button" onclick="switchTab('signup')">Sign Up</button>
+        </div>
+
+        <div id="login-form">
+            {% if google_login_enabled %}
+            <a href="{% provider_login_url 'google' %}" class="btn btn-google">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" height="18" alt="">
+                Continue with Google
+            </a>
+            <div class="auth-divider"><span>or sign in with username</span></div>
+            {% endif %}
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <div class="auth-actions">
+                  <button type="submit" class="btn btn-primary">Login</button>
+                  <a href="{% url 'Home' %}" class="btn btn-outline-secondary">Go back home</a>
+                </div>
+            </form>
+            {% if form.errors and tab != 'signup' %}
+            <div class="alert alert-danger mt-3 alert-auto-dismiss" id="login-error">
+                {% for error in form.non_field_errors %}<p class="mb-0">{{ error }}</p>{% endfor %}
+                {% if not form.non_field_errors %}
+                <p class="mb-0">Invalid username or password.</p>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+
+        <div id="signup-form" style="display: none;">
+            <form method="post" action="{% url 'signup' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="new-username">Username</label>
+                    <input type="text" id="new-username" name="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-password">Password</label>
+                    <input type="password" id="new-password" name="password1" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="password2" class="form-control" required>
+                </div>
+                <div class="auth-actions">
+                  <button type="submit" class="btn btn-primary">Create Account</button>
+                  <a href="{% url 'Home' %}" class="btn btn-outline-secondary">Go back home</a>
+                </div>
+            </form>
+            {% if form.errors and tab == 'signup' %}
+            <div class="alert alert-danger mt-3 alert-auto-dismiss">
+                {% for field in form %}
+                    {% for error in field.errors %}<p class="mb-0 field-error">{{ field.label }}: {{ error }}</p>{% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}<p class="mb-0">{{ error }}</p>{% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            document.getElementById('login-tab').classList.toggle('active', tab === 'login');
+            document.getElementById('signup-tab').classList.toggle('active', tab === 'signup');
+            document.getElementById('login-form').style.display = tab === 'login' ? 'block' : 'none';
+            document.getElementById('signup-form').style.display = tab === 'signup' ? 'block' : 'none';
+        }
+        {% if tab == 'signup' %}switchTab('signup');{% endif %}
+
+        document.querySelectorAll('.alert-auto-dismiss').forEach(function(el) {
+            setTimeout(function() {
+                el.style.transition = 'opacity 0.4s';
+                el.style.opacity = '0';
+                setTimeout(function() { el.remove(); }, 400);
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
